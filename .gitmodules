@@ -1,0 +1,3 @@
+[submodule "WEST"]
+	path = WEST
+	url = https://github.com/zwang271/WEST
