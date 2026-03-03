@@ -1,0 +1,12 @@
+INPUT
+	s0,s1,s2: bool;
+
+FTSPEC
+	abcd1234 SPEC0: G[1,2] (s0 || s1);
+	abce1235 SPEC1: s0 U[0,2] (s1 && s2);
+	abcd1234 SPEC2: (F[0,1] s0) R[0,1] s1;
+
+PTSPEC
+	abcd1234 SPEC3: H[1,2] (s0 || s1);
+	abce1235 SPEC4: s0 S[0,2] (s1 && s2);
+	abce1235 SPEC5: (O[0,1] s0) T[0,1] s1;

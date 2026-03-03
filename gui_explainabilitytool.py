@@ -41,17 +41,17 @@ class ExplainabilityTool(QMainWindow):
     '''
     def __init__(self):
         super().__init__()
-        self.contracts_list = self.read_contracts("../data/contracts.txt")
-        self.uuid_dict = self.read_uuid("../data/contracts.txt")
+        self.contracts_list = self.read_contracts("data/contracts.txt")
+        self.uuid_dict = self.read_uuid("data/contracts.txt")
 
         self.data_by_exec = {}
 
         output_files = sorted(
-            f for f in os.listdir("../data") if f.startswith("output_exec")
+            f for f in os.listdir("data") if f.startswith("output_exec")
         )
 
         for i, file in enumerate(output_files):
-            file_path = os.path.join("../data", file)
+            file_path = os.path.join("data", file)
             self.data_by_exec[i + 1] = self.read_dist_met(file_path, self.contracts_list)
             pass
 
