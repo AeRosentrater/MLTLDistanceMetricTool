@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 #
 import os
-import sys
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-import matplotlib.pyplot as plt
 import numpy as np
+import sys
+
+from PyQt5.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QLabel, QGridLayout, QHBoxLayout,
+    QPushButton, QComboBox, QTextEdit, QTableWidget, QGroupBox,
+    QTableWidgetItem, QHeaderView, QMessageBox, QSpinBox
+)
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QFont, QIcon
+
+import matplotlib.pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+
 '''
 Ashley Behrendt
 February 9, 2026
@@ -41,17 +49,18 @@ class ExplainabilityTool(QMainWindow):
     '''
     def __init__(self):
         super().__init__()
-        self.contracts_list = self.read_contracts("data/contracts.txt")
-        self.uuid_dict = self.read_uuid("data/contracts.txt")
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        self.contracts_list = self.read_contracts(os.path.join(current_directory, "data/contracts.txt"))
+        self.uuid_dict = self.read_uuid(os.path.join(current_directory, "data/contracts.txt"))
 
         self.data_by_exec = {}
 
         output_files = sorted(
-            f for f in os.listdir("data") if f.startswith("output_exec")
+            f for f in os.listdir(os.path.join(current_directory, "data")) if f.startswith("output_exec")
         )
 
         for i, file in enumerate(output_files):
-            file_path = os.path.join("data", file)
+            file_path = os.path.join(current_directory, "data", file)
             self.data_by_exec[i + 1] = self.read_dist_met(file_path, self.contracts_list)
             pass
 
